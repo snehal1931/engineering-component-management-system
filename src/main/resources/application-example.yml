@@ -1,0 +1,29 @@
+# ============================================================
+# APPLICATION-EXAMPLE.YML
+# Safe template to commit to Git — no real credentials.
+#
+# USAGE:
+#   Copy this file to:  src/main/resources/application-local.yml
+#   Then fill in your actual MySQL username and password.
+#
+#   Run with local profile:
+#     java -jar app.jar --spring.profiles.active=local
+#   Or in IntelliJ: set Active Profile = local
+# ============================================================
+
+spring:
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/edcms_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: YOUR_MYSQL_USERNAME_HERE
+    password: YOUR_MYSQL_PASSWORD_HERE
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true    # Useful during local development
+
+logging:
+  level:
+    com.edcms: DEBUG
+    org.hibernate.SQL: DEBUG

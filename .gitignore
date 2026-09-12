@@ -1,0 +1,54 @@
+# ===== Build Artifacts =====
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# ===== Maven =====
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ===== IntelliJ IDEA =====
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# ===== Eclipse =====
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# ===== VS Code =====
+.vscode/
+
+# ===== Spring Boot Dev Tools =====
+spring-devtools.properties
+
+# ===== Logs =====
+*.log
+logs/
+
+# ===== OS Files =====
+.DS_Store
+Thumbs.db
+
+# ===== CRITICAL: Local config with real DB credentials =====
+# Use application-example.yml as a safe template instead.
+application-local.yml
+src/main/resources/application-local.yml
+
+# ===== Environment variable files =====
+.env
+.env.local
+*.env
+
+# ===== Test reports =====
+surefire-reports/

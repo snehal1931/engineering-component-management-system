@@ -1,0 +1,89 @@
+# ============================================================
+# APPLICATION CONFIGURATION — EDCMS
+# Engineering Component & Assembly Management System
+# ============================================================
+#
+# ⚠️  DO NOT put real credentials in this file.
+#     This file is committed to Git.
+#     Create application-local.yml for local development
+#     (it is listed in .gitignore and will never be committed).
+#
+# The application reads DB credentials from environment variables.
+# Set these before running:
+#
+#   EDCMS_DB_HOST     (default: localhost)
+#   EDCMS_DB_PORT     (default: 3306)
+#   EDCMS_DB_NAME     (default: edcms_db)
+#   EDCMS_DB_USER     (your MySQL username)
+#   EDCMS_DB_PASS     (your MySQL password)
+# ============================================================
+
+spring:
+
+  application:
+    name: engineering-component-manager
+
+  # ── Database ──────────────────────────────────────────────
+  datasource:
+    url: jdbc:mysql://${EDCMS_DB_HOST:localhost}:${EDCMS_DB_PORT:3306}/${EDCMS_DB_NAME:edcms_db}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: ${EDCMS_DB_USER}
+    password: ${EDCMS_DB_PASS}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    # HikariCP connection pool — sensible defaults for dev
+    hikari:
+      pool-name: EdcmsHikariPool
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 20000
+
+  # ── JPA / Hibernate ───────────────────────────────────────
+  jpa:
+    hibernate:
+      # IMPORTANT: Use 'validate' in production once schema is stable.
+      # Use 'update' during active development (Phases 2–5).
+      # Use 'create-drop' for isolated test runs with H2.
+      ddl-auto: update
+    show-sql: false          # Set true temporarily to debug queries
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+        # Prevents the N+1 problem in lazy loading
+        enable_lazy_load_no_trans: false
+
+  # ── Jackson (JSON serialization) ───────────────────────────
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false    # ISO-8601 date strings in API responses
+    deserialization:
+      fail-on-unknown-properties: false   # Ignore extra JSON fields in requests
+
+# ── Application Server ─────────────────────────────────────
+server:
+  port: 8080
+  error:
+    # Return structured error details (handled by GlobalExceptionHandler)
+    include-message: always
+    include-binding-errors: always
+
+# ── SpringDoc / Swagger UI ─────────────────────────────────
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    try-it-out-enabled: true
+    operations-sorter: method
+
+# ── Logging ────────────────────────────────────────────────
+logging:
+  level:
+    root: INFO
+    com.edcms: DEBUG                       # Full debug for our code
+    org.springframework.web: INFO
+    org.hibernate.SQL: INFO                # Set to DEBUG to see raw SQL
+    org.hibernate.type.descriptor.sql: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

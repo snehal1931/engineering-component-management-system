@@ -1,0 +1,40 @@
+# ============================================================
+# TEST PROFILE CONFIGURATION
+# Used by @ActiveProfiles("test") in test classes.
+# Overrides application.yml to use H2 in-memory database
+# so tests never require a real MySQL instance.
+# ============================================================
+
+spring:
+  datasource:
+    # NON_KEYWORDS=value prevents H2 from rejecting MySQL-specific SQL keywords.
+    # DEFER_DATASOURCE_INITIALIZATION=TRUE ensures Hibernate DDL runs before schema.sql.
+    url: jdbc:h2:mem:edcms_test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL;NON_KEYWORDS=value
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop    # Fresh schema for every test run
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: false
+    # Let Hibernate fully control schema creation order.
+    # H2 defers FK validation until all tables exist.
+    properties:
+      hibernate:
+        globally_quoted_identifiers: false
+        format_sql: false
+
+  # Ensures Hibernate schema generation completes before any data.sql/schema.sql runs
+  defer-datasource-initialization: false
+
+  h2:
+    console:
+      enabled: false
+
+logging:
+  level:
+    com.edcms: WARN            # Quieter logs during test runs
+    org.hibernate: WARN
+    org.hibernate.tool.schema: ERROR   # Suppress DDL ordering warnings (benign for H2)
