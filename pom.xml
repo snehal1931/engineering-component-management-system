@@ -85,11 +85,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- H2 in-memory DB for test slice tests -->
+        <!-- H2 in-memory DB for tests and the local demo profile -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>test</scope>
+            <scope>runtime</scope>
         </dependency>
 
     </dependencies>

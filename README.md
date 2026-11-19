@@ -726,6 +726,27 @@ mvn spring-boot:run
 | `http://localhost:8080/swagger-ui.html` | Interactive Swagger UI — try all endpoints |
 | `http://localhost:8080/api-docs` | Raw OpenAPI JSON spec |
 | `http://localhost:8080/api/components` | Example REST endpoint |
+| `http://localhost:5500` | EDCMS frontend (start it with the command below) |
+
+To serve the standalone frontend locally, open another terminal from the project
+root and run:
+
+```powershell
+python -m http.server 5500 --directory frontend
+```
+
+The frontend connects to the API at `http://localhost:8080`. The backend allows
+the local frontend origin (`http://localhost:5500`) to make API requests.
+
+For a quick local demo without MySQL credentials, start the backend with the
+in-memory H2 profile:
+
+```powershell
+mvn spring-boot:run "-Dspring-boot.run.profiles=demo"
+```
+
+The demo database is recreated on startup and its data is discarded when the
+backend stops. MySQL remains the default profile for normal use.
 
 ---
 

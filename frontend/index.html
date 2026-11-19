@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDCMS — Engineering Design & Component Management System</title>
+  <meta name="description" content="Engineering Design & Component Management System — manage projects, components, assemblies, versions, dependencies and compatibility rules." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════ SIDEBAR ═══════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="12" height="12" rx="2" fill="url(#g1)"/>
+          <rect x="18" y="2" width="12" height="12" rx="2" fill="url(#g2)"/>
+          <rect x="2" y="18" width="12" height="12" rx="2" fill="url(#g3)"/>
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="url(#g4)" opacity="0.6"/>
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="14" y2="14" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient>
+            <linearGradient id="g2" x1="0" y1="0" x2="14" y2="14" gradientUnits="userSpaceOnUse"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+            <linearGradient id="g3" x1="0" y1="0" x2="14" y2="14" gradientUnits="userSpaceOnUse"><stop stop-color="#10b981"/><stop offset="1" stop-color="#06b6d4"/></linearGradient>
+            <linearGradient id="g4" x1="0" y1="0" x2="14" y2="14" gradientUnits="userSpaceOnUse"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ef4444"/></linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">EDCMS</span>
+        <span class="brand-sub">Engineering System</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <button class="nav-item active" data-section="dashboard" id="nav-dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </button>
+
+      <div class="nav-section-label">Management</div>
+      <button class="nav-item" data-section="projects" id="nav-projects">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        Projects
+      </button>
+      <button class="nav-item" data-section="components" id="nav-components">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4.5v9L12 20l-9-4.5v-9L12 2z"/><polyline points="12 20 12 11"/><polyline points="21 6.5 12 11 3 6.5"/></svg>
+        Components
+      </button>
+      <button class="nav-item" data-section="versions" id="nav-versions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 15.54a5 5 0 0 1 0-7.07"/></svg>
+        Versions
+      </button>
+      <button class="nav-item" data-section="assemblies" id="nav-assemblies">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Assemblies
+      </button>
+      <button class="nav-item" data-section="users" id="nav-users">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Users
+      </button>
+
+      <div class="nav-section-label">Engineering</div>
+      <button class="nav-item" data-section="dependencies" id="nav-dependencies">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+        Dependencies
+      </button>
+      <button class="nav-item" data-section="compatibility" id="nav-compatibility">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+        Compatibility
+      </button>
+      <button class="nav-item" data-section="impact" id="nav-impact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Impact Analysis
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="api-status" id="api-status">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="status-text">Checking API...</span>
+      </div>
+      <div class="api-url-config">
+        <input type="text" id="api-base-url" placeholder="http://localhost:8080" value="http://localhost:8080" />
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════ MAIN ═══════════════════ -->
+  <main class="main-content" id="main-content">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="topbar-actions">
+        <button class="btn btn-ghost btn-sm" id="refresh-btn" title="Refresh current view">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Refresh
+        </button>
+      </div>
+    </header>
+
+    <!-- ── DASHBOARD ── -->
+    <section class="page-section active" id="section-dashboard">
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <p>System overview and quick stats</p>
+      </div>
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card" id="stat-projects">
+          <div class="stat-icon projects-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="stat-val-projects">—</span>
+            <span class="stat-label">Projects</span>
+          </div>
+        </div>
+        <div class="stat-card" id="stat-components">
+          <div class="stat-icon components-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4.5v9L12 20l-9-4.5v-9L12 2z"/></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="stat-val-components">—</span>
+            <span class="stat-label">Components</span>
+          </div>
+        </div>
+        <div class="stat-card" id="stat-assemblies">
+          <div class="stat-icon assemblies-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="stat-val-assemblies">—</span>
+            <span class="stat-label">Assemblies</span>
+          </div>
+        </div>
+        <div class="stat-card" id="stat-users">
+          <div class="stat-icon users-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="stat-val-users">—</span>
+            <span class="stat-label">Users</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-header"><h3>Recent Projects</h3></div>
+          <div class="card-body" id="dashboard-projects-list"><div class="skeleton-list"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>Components by Type</h3></div>
+          <div class="card-body" id="dashboard-components-chart">
+            <div class="type-bars" id="type-bars"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PROJECTS ── -->
+    <section class="page-section" id="section-projects">
+      <div class="page-header">
+        <div>
+          <h1>Projects</h1>
+          <p>Engineering project lifecycle management</p>
+        </div>
+        <button class="btn btn-primary" id="btn-create-project">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Project
+        </button>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-wrapper" id="projects-table-wrapper">
+            <div class="loading-state">Loading projects...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── COMPONENTS ── -->
+    <section class="page-section" id="section-components">
+      <div class="page-header">
+        <div>
+          <h1>Components</h1>
+          <p>Mechanical, Electrical & Software component catalog</p>
+        </div>
+        <button class="btn btn-primary" id="btn-create-component">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Component
+        </button>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active" data-type="ALL" id="filter-all">All</button>
+        <button class="filter-btn" data-type="MECHANICAL" id="filter-mechanical">⚙️ Mechanical</button>
+        <button class="filter-btn" data-type="ELECTRICAL" id="filter-electrical">⚡ Electrical</button>
+        <button class="filter-btn" data-type="SOFTWARE" id="filter-software">💻 Software</button>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-wrapper" id="components-table-wrapper">
+            <div class="loading-state">Loading components...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VERSIONS ── -->
+    <section class="page-section" id="section-versions">
+      <div class="page-header">
+        <div>
+          <h1>Component Versions</h1>
+          <p>DRAFT → APPROVED → DEPRECATED lifecycle</p>
+        </div>
+        <button class="btn btn-primary" id="btn-create-version">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Version
+        </button>
+      </div>
+      <div class="version-component-selector">
+        <label>Select Component:</label>
+        <select id="version-component-select">
+          <option value="">— choose a component —</option>
+        </select>
+        <button class="btn btn-secondary btn-sm" id="btn-load-versions">Load Versions</button>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-wrapper" id="versions-table-wrapper">
+            <div class="empty-state">Select a component above to view its versions.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ASSEMBLIES ── -->
+    <section class="page-section" id="section-assemblies">
+      <div class="page-header">
+        <div>
+          <h1>Assemblies</h1>
+          <p>Bill of Materials (BOM) composition per project</p>
+        </div>
+        <button class="btn btn-primary" id="btn-create-assembly">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Assembly
+        </button>
+      </div>
+      <div class="version-component-selector">
+        <label>Select Project:</label>
+        <select id="assembly-project-select">
+          <option value="">— choose a project —</option>
+        </select>
+        <button class="btn btn-secondary btn-sm" id="btn-load-assemblies">Load Assemblies</button>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-wrapper" id="assemblies-table-wrapper">
+            <div class="empty-state">Select a project above to view its assemblies.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── USERS ── -->
+    <section class="page-section" id="section-users">
+      <div class="page-header">
+        <div>
+          <h1>Users</h1>
+          <p>User account management</p>
+        </div>
+        <button class="btn btn-primary" id="btn-create-user">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New User
+        </button>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-wrapper" id="users-table-wrapper">
+            <div class="loading-state">Loading users...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DEPENDENCIES ── -->
+    <section class="page-section" id="section-dependencies">
+      <div class="page-header">
+        <div>
+          <h1>Dependencies</h1>
+          <p>Component version dependency graph with cycle detection</p>
+        </div>
+        <button class="btn btn-primary" id="btn-create-dependency">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Declare Dependency
+        </button>
+      </div>
+      <div class="version-component-selector">
+        <label>Select Component Version:</label>
+        <select id="dep-version-select">
+          <option value="">— choose a component version —</option>
+        </select>
+        <button class="btn btn-secondary btn-sm" id="btn-load-deps">Load Dependencies</button>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Selected Version Dependency Graph</h3></div>
+        <div class="card-body">
+          <div class="dependency-graph" id="dependency-graph">
+            <div class="empty-state">Select a component version to view its dependency graph.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-wrapper" id="deps-table-wrapper">
+            <div class="empty-state">Select a component version to view its dependencies.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── COMPATIBILITY ── -->
+    <section class="page-section" id="section-compatibility">
+      <div class="page-header">
+        <div>
+          <h1>Compatibility</h1>
+          <p>Rules and compatibility checking between component versions</p>
+        </div>
+        <button class="btn btn-primary" id="btn-create-compat-rule">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Rule
+        </button>
+      </div>
+
+      <div class="compat-check-panel card">
+        <div class="card-header"><h3>🔍 Compatibility Check</h3></div>
+        <div class="card-body">
+          <p class="hint-text">Enter comma-separated component version IDs to check mutual compatibility:</p>
+          <div class="compat-check-form">
+            <input type="text" id="compat-check-ids" placeholder="e.g. 1,2,3" />
+            <button class="btn btn-accent" id="btn-run-compat-check">Check Compatibility</button>
+          </div>
+          <div id="compat-check-result"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>Declared Rules</h3></div>
+        <div class="card-body">
+          <div class="table-wrapper" id="compat-rules-wrapper">
+            <div class="loading-state">Loading rules...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── IMPACT ANALYSIS ── -->
+    <section class="page-section" id="section-impact">
+      <div class="page-header">
+        <div>
+          <h1>Impact Analysis</h1>
+          <p>Analyze downstream impact before deprecating components</p>
+        </div>
+      </div>
+
+      <div class="impact-panels">
+        <div class="card">
+          <div class="card-header"><h3>🎯 By Component Version</h3></div>
+          <div class="card-body">
+            <p class="hint-text">Which assemblies use a specific version?</p>
+            <div class="impact-form">
+              <input type="number" id="impact-version-id" placeholder="Version ID" min="1" />
+              <button class="btn btn-accent" id="btn-impact-version">Analyze</button>
+            </div>
+            <div id="impact-version-result"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h3>🧩 By Component (All Versions)</h3></div>
+          <div class="card-body">
+            <p class="hint-text">Which assemblies use ANY version of a component?</p>
+            <div class="impact-form">
+              <input type="number" id="impact-component-id" placeholder="Component ID" min="1" />
+              <button class="btn btn-accent" id="btn-impact-component">Analyze</button>
+            </div>
+            <div id="impact-component-result"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════ MODALS ═══════════════════ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h2 id="modal-title">Modal</h2>
+        <button class="modal-close" id="modal-close" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer" id="modal-footer">
+        <button class="btn btn-ghost" id="modal-cancel">Cancel</button>
+        <button class="btn btn-primary" id="modal-submit">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ TOAST ═══════════════════ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
